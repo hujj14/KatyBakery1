@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head  href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap">
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KatyBakery - Вкуснейшая выпечка</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        header {
+            background-color: rgb(173, 151, 131);
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            color: #000000;
+            margin: 0;
+            font-family: 'Georgia', serif;
+        }
+        
+        .products {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            flex: 1;
+        }
+        
+        .product {
+            width: 280px;
+            margin: 20px;
+            border: 2px solid #ffffff;
+            background-color: rgb(173, 151, 131);
+            text-align: center;
+            transition: all 0.3s ease;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .product:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(93, 140, 90, 0.3);
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 220px;
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .product-name {
+            padding: 15px;
+            font-weight: bold;
+            color: #5e3d12;
+            font-size: 16px;
+        }
+        
+        .product-price {
+            color: #000000;
+            font-weight: bold;
+            padding-bottom: 15px;
+        }
+        
+        .product a {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        footer {
+            background-color: rgb(173, 151, 131);
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footer-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #5e3d12;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            color: #5e3d12;
+            font-size: 24px;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: #000000;
+        }
+        
+        .phone-number {
+            font-size: 18px;
+            color: #5e3d12;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        
+        @media (max-width: 900px) {
+            .product {
+                width: 45%;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .product {
+                width: 90%;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .footer-section {
+                min-width: 100%;
+            }
+        }
+        .intro {
+    background-color: #f9f6f2;
+    padding: 40px 20px;
+    text-align: center;
+    font-size: 18px;
+    line-height: 1.8;
+    color: #3a2e1d;
+    max-width: 1000px;
+    margin: 0 auto;
+    border-bottom: 2px solid #d4c2b0;
+    font-family: 'Dancing Script', cursive;
+}
+header {
+    position: relative;
+    background-color: rgb(173, 151, 131);
+    padding: 20px 30px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+
+
+
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    
+    
+    <header>
+        <h1 class="logo">KatyBakery</h1>
+    </header>
+    <section class="intro">
+        <p>
+            Кондитерская <strong>Katy Bakery</strong> приготовит для вас уникальные десерты на растительной основе, 
+            которые подойдут для вегетарианцев, людей придерживающихся поста или имеющих пищевые ограничения. 
+            Мы не используем глютен, белый сахар и искусственные красители, наши десерты можно детям с раннего возраста 
+            и всем тем, кто заботится о своём здоровье и теле.
+        </p>
+    </section>
+    
+    
+    <div class="products">
+        <!-- Товар 1 -->
+        <div class="product">
+            <a href="firstCake.html" target="_blank">
+                <div class="product-image">
+                    <img src="https://content3.flowwow-images.com/data/flowers/524x524/69/1710330209_7100569.jpg">
+                </div>
+                <div class="product-name">Шоколадное безумие</div>
+                <div class="product-price">4200₽/кг</div>
+            </a>
+        </div>
+        
+        <!-- Товар 2 -->
+        <div class="product">
+            <a href="secondCake.html" target="_blank">
+                <div class="product-image">
+                    <img src="https://content2.flowwow-images.com/data/flowers/524x524/14/1730124666_42541914.jpg">
+                </div>
+                <div class="product-name">Малина со сливками
+                </div>
+                <div class="product-price">4200₽</div>
+            </a>
+        </div>
+        
+        <!-- Товар 3 -->
+        <div class="product">
+            <a href="thirdCake.html" target="_blank">
+                <div class="product-image">
+                    <img src="https://content2.flowwow-images.com/data/flowers/524x524/67/1730190597_41511967.jpg">
+                </div>
+                <div class="product-name">Лимонный медовик с облепиховым курдом</div>
+                <div class="product-price">3800₽</div>
+            </a>
+        </div>
+        
+        <!-- Товар 4 -->
+        <div class="product">
+            <a href="fouthCake.html" target="_blank">
+                <div class="product-image">
+                    <img src="https://content2.flowwow-images.com/data/flowers/524x524/44/1729680671_78865044.jpg">
+                </div>
+                <div class="product-name">Шоколадный медовик</div>
+                <div class="product-price">4300₽</div>
+            </a>
+        </div>
+        
+        <!-- Товар 5 -->
+        <div class="product">
+            <a href="fithCake.html" target="_blank">
+                <div class="product-image">
+                    <img src="https://content2.flowwow-images.com/data/flowers/524x524/04/1730124711_47873304.jpg">
+                </div>
+                <div class="product-name">Птичье Немолоко</div>
+                <div class="product-price">2500₽</div>
+            </a>
+        </div>
+        
+        <!-- Товар 6 -->
+        <div class="product">
+            <a href="sexthCake.html" target="_blank">
+                <div class="product-image">
+                    <img src="https://content2.flowwow-images.com/data/flowers/524x524/25/1736869672_14343925.jpg">
+                </div>
+                <div class="product-name">Панчо</div>
+                <div class="product-price">3800₽</div>
+            </a>
+        </div>
+        
+        <!-- Товар 7 -->
+        <div class="product">
+            <a href="sevenCake.html" target="_blank">
+                <div class="product-image">
+                    <img src="https://content2.flowwow-images.com/data/flowers/524x524/63/1730130274_99479263.jpg">
+                </div>
+                <div class="product-name">Кето торт на эритрите "Пломбир - апельсин"</div>
+                <div class="product-price">4200₽</div>
+            </a>
+        </div>
+        
+        <!-- Товар 8 -->
+        <div class="product">
+            <a href="eightCake.html" target="_blank">
+                <div class="product-image">
+                    <img src="https://content2.flowwow-images.com/data/flowers/524x524/84/1736431339_99549584.jpg">
+                </div>
+                <div class="product-name">Манговый тарт без сахара</div>
+                <div class="product-price">1700₽</div>
+            </a>
+        </div>
+        
+        <!-- Товар 9 -->
+        <div class="product">
+            <a href="nineCake.html" target="_blank">
+                <div class="product-image">
+                    <img src="https://content2.flowwow-images.com/data/flowers/524x524/40/1736437203_76401440.jpg">
+                </div>
+                <div class="product-name">Тарт большой манговый без сахара</div>
+                <div class="product-price">2800₽</div>
+            </a>
+        </div>
+        
+        <!-- Товар 10 -->
+        <div class="product">
+            <a href="tenCake.html" target="_blank">
+                <div class="product-image">
+                    <img src="https://content2.flowwow-images.com/data/flowers/524x524/24/1730124549_28688724.jpg">
+                </div>
+                <div class="product-name">Медовик классический из цельнозерновой муки</div>
+                <div class="product-price">3800₽</div>
+            </a>
+        </div>
+        
+        <!-- Товар 11 -->
+        <div class="product">
+            <a href="elevenCake.html" target="_blank">
+                <div class="product-image">
+                    <img src="https://content3.flowwow-images.com/data/flowers/524x524/85/1730190636_1589385.jpg">
+                </div>
+                <div class="product-name">Медовик миндальный с малиной</div>
+                <div class="product-price">3500₽</div>
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="footer-title">Свяжитесь с нами</div>
+                <div class="phone-number">
+                    <i class="fas fa-phone"></i> +7 (916) 306-66-16
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <div class="footer-title">Мы в соцсетях</div>
+                <div class="social-links">
+                    <a href="https://instagram.com/katy_bakery.msk?igshid=NTc4MTIwNjQ2YQ==" target="_blank" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://web.telegram.org/a/#1116194195" target="_blank" aria-label="Telegram">
+                        <i class="fab fa-telegram-plane"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <div class="footer-title">Часы работы</div>
+                <div>Пн-Пт: 9:00 - 20:00</div>
+                <div>Сб-Вс: 10:00 - 18:00</div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
