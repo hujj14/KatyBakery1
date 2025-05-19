@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head  href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet">
+
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,8 +18,9 @@
         
         header {
             background-color: rgb(173, 151, 131);
-            padding: 20px;
+            padding: px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            
         }
         
         .logo {
@@ -183,7 +185,124 @@ header {
     padding: 20px 30px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     
+    
 }
+.header-social-icons {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    display: flex;
+    gap: 15px;
+}
+
+.header-social-icons a {
+    color: #ffffff;
+    font-size: 30px;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.header-social-icons a:hover {
+    color: #ffffff;
+}
+.logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 40px;
+    font-weight: 700;
+    color: #3a2e1d;
+    margin: 0;
+}
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+.header-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px;
+    font-weight: 600;
+    color: #3a2e1d;
+    text-align: center;
+}
+
+.header-socials {
+    display: flex;
+    gap: 15px;
+}
+
+.header-socials a {
+    font-size: 35px;
+    color: #3a2e1d;
+    transition: color 0.3s ease;
+}
+
+.header-socials a:hover {
+    color: #000;
+}
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+.logo {
+    font-size: 32px;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: bold;
+    color: #000000;
+    margin: 0;
+}
+
+.header-contact {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.header-phone {
+    font-size: 18px;
+    color: #3a2e1d;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: bold;
+}
+
+.header-socials {
+    display: flex;
+    gap: 15px;
+}
+
+.header-socials a {
+    font-size: 30x;
+    color: #3a2e1d;
+    transition: color 0.3s ease;
+}
+
+.header-socials a:hover {
+    color: #000;
+}
+.header-phone a {
+    text-decoration: none;
+    color: #3a2e1d;
+    font-weight: bold;
+}
+
+.header-phone a:hover {
+    text-decoration: underline;
+    color: #000;
+}
+
+
+
+
+
 
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -192,8 +311,23 @@ header {
     
     
     <header>
-        <h1 class="logo">KatyBakery</h1>
-    </header>
+        <div class="header-content">
+          <h1 class="logo">KatyBakery</h1>
+              
+            <div class="header-socials">
+              <a href="https://instagram.com/katy_bakery.msk?igshid=NTc4MTIwNjQ2YQ==" target="_blank" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a href="https://web.telegram.org/a/#1116194195" target="_blank" aria-label="Telegram">
+                <i class="fab fa-telegram-plane"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </header>
+      
+      
+    
     <section class="intro">
         <p>
             Кондитерская Katy Bakery приготовит для вас уникальные десерты на растительной основе, 
@@ -371,9 +505,11 @@ header {
         <div class="footer-content">
             <div class="footer-section">
                 <div class="footer-title">Свяжитесь с нами</div>
-                <div class="phone-number">
-                    <i class="fas fa-phone"></i> +7 (916) 306-66-16
-                </div>
+                <div class="header-phone">
+                    <i class="fas fa-phone"></i>
+                    <a href="tel:+79163066616">+7 (916) 306-66-16</a>
+                  </div>
+                  
             </div>
             
             <div class="footer-section">
