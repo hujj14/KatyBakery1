@@ -1,0 +1,767 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Корзина - KatyBakery</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Добавляем EmailJS SDK -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    
+    header {
+      background-color: rgb(173, 151, 131);
+      padding: 20px 30px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 40px;
+      font-weight: 700;
+      color: #3a2e1d;
+      margin: 0;
+    }
+    
+    .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .back-btn {
+      color: #3a2e1d;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 8px 15px;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+    
+    .back-btn:hover {
+      background-color: rgba(0,0,0,0.1);
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 0 20px;
+      flex: 1;
+    }
+    
+    h1 {
+      color: #5e3d12;
+      font-family: 'Cormorant Garamond', serif;
+      text-align: center;
+    }
+    
+    .cart-item { 
+      display: flex; 
+      align-items: center; 
+      margin-bottom: 15px; 
+      border-bottom: 1px solid #eee; 
+      padding: 15px 0;
+    }
+    
+    .cart-item img { 
+      width: 100px; 
+      height: 100px; 
+      object-fit: cover; 
+      border-radius: 8px; 
+      margin-right: 20px; 
+    }
+    
+    .cart-item-info { 
+      flex-grow: 1; 
+    }
+    
+    .cart-item-name { 
+      font-weight: bold; 
+      color: #3a2e1d; 
+      font-size: 18px; 
+      margin-bottom: 5px;
+    }
+    
+    .cart-item-price { 
+      color: #5e3d12; 
+      font-size: 16px; 
+    }
+    
+    .delete-btn {
+      background-color: #c0392b;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.3s ease;
+    }
+    
+    .delete-btn:hover {
+      background-color: #e74c3c;
+    }
+    
+    .empty-cart { 
+      color: #999; 
+      font-size: 18px; 
+      margin-top: 50px; 
+      text-align: center; 
+    }
+    
+    .cart-total {
+      text-align: right;
+      font-size: 20px;
+      font-weight: bold;
+      color: #5e3d12;
+      margin: 30px 0;
+    }
+    
+    .checkout-btn {
+      display: block;
+      width: 200px;
+      margin: 0 auto;
+      background-color: #5e3d12;
+      color: white;
+      text-align: center;
+      padding: 12px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+    
+    .checkout-btn:hover {
+      background-color: #3a2e1d;
+    }
+    
+    footer {
+      background-color: rgb(173, 151, 131);
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    }
+
+    /* Стили для формы заказа */
+    #order-form {
+      display: none;
+      max-width: 500px;
+      margin: 30px auto;
+      padding: 20px;
+      background-color: #f9f6f2;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #5e3d12;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #d4c2b0;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+
+    .required-field::after {
+      content: " *";
+      color: red;
+    }
+
+    #submit-order {
+      background-color: #5e3d12;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s;
+      width: 100%;
+    }
+
+    #submit-order:hover {
+      background-color: #3a2e1d;
+    }
+
+    /* Стили для подтверждения заказа */
+    .order-confirmation {
+      display: none;
+      max-width: 600px;
+      margin: 30px auto;
+      padding: 30px;
+      background-color: #f9f6f2;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .order-confirmation h2 {
+      color: #5e3d12;
+      font-family: 'Cormorant Garamond', serif;
+      margin-bottom: 20px;
+    }
+
+    .order-confirmation p {
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+
+    .order-details {
+      text-align: left;
+      background-color: white;
+      padding: 15px;
+      border-radius: 5px;
+      margin: 20px 0;
+    }
+
+    .back-to-shop {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #5e3d12;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+
+    .back-to-shop:hover {
+      background-color: #3a2e1d;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <h1 class="logo">KatyBakery</h1>
+      <a href="index.html" class="back-btn">На главную</a>
+    </div>
+  </header>
+
+  <div class="container">
+    <h1>Ваша корзина</h1>
+    <div id="cart-items"></div>
+    <div class="cart-total" id="cart-total">Итого: 0₽</div>
+    <a href="#" class="checkout-btn">Оформить заказ</a>
+  </div>
+
+  <!-- Форма заказа -->
+  <div id="order-form">
+    <h3 style="text-align: center; color: #5e3d12;">Оформление заказа</h3>
+    <form id="orderForm">
+      <div class="form-group">
+        <label for="customer-name" class="required-field">ФИО</label>
+        <input type="text" id="customer-name" required placeholder="Иванов Иван Иванович">
+      </div>
+      <div class="form-group">
+        <label for="customer-phone" class="required-field">Номер телефона</label>
+        <input type="tel" id="customer-phone" required placeholder="+7 (123) 456-78-90">
+      </div>
+      <div class="form-group">
+        <label for="customer-address">Адрес доставки (если требуется)</label>
+        <input type="text" id="customer-address" placeholder="ул. Примерная, д. 1, кв. 1">
+      </div>
+      <div class="form-group">
+        <label for="customer-comment">Комментарий к заказу</label>
+        <textarea id="customer-comment" rows="3" placeholder="Ваши пожелания..."></textarea>
+      </div>
+      <button type="submit" id="submit-order">Подтвердить заказ</button>
+    </form>
+  </div>
+
+  <!-- Подтверждение заказа -->
+  <div class="order-confirmation" id="order-confirmation">
+    <h2>Ваш заказ оформлен!</h2>
+    <p>Спасибо за ваш заказ в KatyBakery!</p>
+    <div class="order-details" id="order-details">
+      <!-- Сюда будут вставлены детали заказа -->
+    </div>
+    <p>Мы свяжемся с вами в ближайшее время для подтверждения заказа.</p>
+    <p>Если у вас есть вопросы, звоните нам: <a href="tel:+79163066616">+7 (916) 306-66-16</a></p>
+    <a href="index.html" class="back-to-shop">Вернуться в магазин</a>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <div class="footer-title">Свяжитесь с нами</div>
+        <div class="header-phone">
+          <i class="fas fa-phone"></i>
+          <a href="tel:+79163066616">+7 (916) 306-66-16</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const cartItemsContainer = document.getElementById('cart-items');
+      const cartTotalElement = document.getElementById('cart-total');
+      const checkoutBtn = document.querySelector('.checkout-btn');
+      const orderForm = document.getElementById('order-form');
+      const orderConfirmation = document.getElementById('order-confirmation');
+      const orderDetails = document.getElementById('order-details');
+
+      // Функция для извлечения цены из строки
+      function extractPrice(priceStr) {
+        const numericValue = priceStr.replace(/[^\d.]/g, '');
+        return parseFloat(numericValue) || 0;
+      }
+
+      function renderCart() {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cartItemsContainer.innerHTML = '';
+
+        if (cart.length === 0) {
+          cartItemsContainer.innerHTML = '<p class="empty-cart">Ваша корзина пуста.</p>';
+          cartTotalElement.textContent = 'Итого: 0₽';
+          checkoutBtn.style.display = 'none';
+          return;
+        } else {
+          checkoutBtn.style.display = 'block';
+        }
+
+        let total = 0;
+        
+        cart.forEach((item, index) => {
+          if (!item.img || !item.name || !item.price) {
+            console.warn('Невалидный товар в корзине:', item);
+            return;
+          }
+          
+          const price = extractPrice(item.price);
+          total += price;
+          
+          const div = document.createElement('div');
+          div.classList.add('cart-item');
+
+          div.innerHTML = `
+            <img src="${item.img}" alt="${item.name}">
+            <div class="cart-item-info">
+              <div class="cart-item-name">${item.name}</div>
+              <div class="cart-item-price">${item.price}</div>
+            </div>
+            <button class="delete-btn" data-index="${index}">Удалить</button>
+          `;
+
+          cartItemsContainer.appendChild(div);
+        });
+
+        cartTotalElement.textContent = `Итого: ${total.toFixed(2)}₽`;
+
+        document.querySelectorAll('.delete-btn').forEach(button => {
+          button.addEventListener('click', (e) => {
+            const index = parseInt(button.getAttribute('data-index'));
+            removeItemFromCart(index);
+          });
+        });
+      }
+
+      function removeItemFromCart(index) {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        
+        if (index >= 0 && index < cart.length) {
+          cart.splice(index, 1);
+          localStorage.setItem('cart', JSON.stringify(cart));
+          renderCart();
+          
+          if (window.parent) {
+            window.parent.postMessage({type: 'updateCartCount', count: cart.length}, '*');
+          }
+        }
+      }
+
+      // Обработчик кнопки оформления заказа
+      checkoutBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        
+        if (cart.length === 0) {
+          alert('Ваша корзина пуста!');
+          return;
+        }
+        
+        orderForm.style.display = 'block';
+        orderForm.scrollIntoView({ behavior: 'smooth' });
+      });
+      
+
+      // Обработка отправки формы
+      document.getElementById('orderForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const name = document.getElementById('customer-name').value.trim();
+        const phone = document.getElementById('customer-phone').value.trim();
+        const address = document.getElementById('customer-address').value.trim();
+        const comment = document.getElementById('customer-comment').value.trim();
+        
+        if (!name || !phone) {
+          alert('Пожалуйста, заполните все обязательные поля!');
+          return;
+        }
+        
+        if (!validatePhone(phone)) {
+          alert('Пожалуйста, введите корректный номер телефона!');
+          return;
+        }
+        
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        showOrderConfirmation(cart, name, phone, address, comment);
+      });
+
+      function showOrderConfirmation(cart, name, phone, address, comment) {
+        // Формируем текст подтверждения
+        let confirmationHTML = `
+          <p><strong>Имя:</strong> ${name}</p>
+          <p><strong>Телефон:</strong> ${phone}</p>
+        `;
+        
+        if (address) {
+          confirmationHTML += `<p><strong>Адрес:</strong> ${address}</p>`;
+        }
+        
+        confirmationHTML += `<p><strong>Состав заказа:</strong></p><ul>`;
+        
+        cart.forEach(item => {
+          confirmationHTML += `<li>${item.name} - ${item.price}</li>`;
+        });
+        
+        confirmationHTML += `</ul>`;
+        confirmationHTML += `<p><strong>Итого:</strong> ${calculateTotal(cart)}₽</p>`;
+        
+        if (comment) {
+          confirmationHTML += `<p><strong>Комментарий:</strong> ${comment}</p>`;
+        }
+        
+        // Вставляем детали заказа
+        orderDetails.innerHTML = confirmationHTML;
+        
+        // Показываем подтверждение и скрываем форму
+        orderForm.style.display = 'none';
+        orderConfirmation.style.display = 'block';
+        orderConfirmation.scrollIntoView({ behavior: 'smooth' });
+        
+        // Очищаем корзину
+        localStorage.setItem('cart', JSON.stringify([]));
+        renderCart();
+        
+        // Можно добавить здесь отправку данных на сервер или email
+        // sendOrderToServer(cart, name, phone, address, comment);
+      }
+
+      function calculateTotal(cart) {
+        let total = 0;
+        cart.forEach(item => {
+          const price = parseFloat(item.price.replace(/[^\d.]/g, ''));
+          total += isNaN(price) ? 0 : price;
+        });
+        return total.toFixed(2);
+      }
+      
+      function validatePhone(phone) {
+        const digits = phone.replace(/\D/g, '');
+        return digits.length >= 10;
+      }
+
+      // Инициализация корзины при загрузке
+      renderCart();
+    });
+    function sendOrderToEmail(cart, name, phone, address, comment) {
+  const data = {
+    name,
+    phone,
+    address,
+    comment,
+    cart,
+    total: calculateTotal(cart)
+  };
+
+  fetch('send_order.php', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  }).then(response => {
+    if (!response.ok) {
+      throw new Error('Ошибка при отправке письма');
+    }
+    return response.text();
+  }).then(result => {
+    console.log('Письмо успешно отправлено:', result);
+  }).catch(error => {
+    console.error('Ошибка:', error);
+  });
+}
+
+
+  </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const cartItemsContainer = document.getElementById('cart-items');
+      const cartTotalElement = document.getElementById('cart-total');
+      const checkoutBtn = document.querySelector('.checkout-btn');
+      const orderForm = document.getElementById('order-form');
+      const orderConfirmation = document.getElementById('order-confirmation');
+      const orderDetails = document.getElementById('order-details');
+
+      // Инициализация EmailJS (добавьте ваш User ID)
+      (function() {
+        emailjs.init("YOUR_EMAILJS_USER_ID"); // Замените на ваш реальный User ID
+      })();
+
+      // Функция для извлечения цены из строки
+      function extractPrice(priceStr) {
+        const numericValue = priceStr.replace(/[^\d.]/g, '');
+        return parseFloat(numericValue) || 0;
+      }
+
+      function renderCart() {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cartItemsContainer.innerHTML = '';
+
+        if (cart.length === 0) {
+          cartItemsContainer.innerHTML = '<p class="empty-cart">Ваша корзина пуста.</p>';
+          cartTotalElement.textContent = 'Итого: 0₽';
+          checkoutBtn.style.display = 'none';
+          return;
+        } else {
+          checkoutBtn.style.display = 'block';
+        }
+
+        let total = 0;
+        
+        cart.forEach((item, index) => {
+          if (!item.img || !item.name || !item.price) {
+            console.warn('Невалидный товар в корзине:', item);
+            return;
+          }
+          
+          const price = extractPrice(item.price);
+          total += price;
+          
+          const div = document.createElement('div');
+          div.classList.add('cart-item');
+
+          div.innerHTML = `
+            <img src="${item.img}" alt="${item.name}">
+            <div class="cart-item-info">
+              <div class="cart-item-name">${item.name}</div>
+              <div class="cart-item-price">${item.price}</div>
+            </div>
+            <button class="delete-btn" data-index="${index}">Удалить</button>
+          `;
+
+          cartItemsContainer.appendChild(div);
+        });
+
+        cartTotalElement.textContent = `Итого: ${total.toFixed(2)}₽`;
+
+        document.querySelectorAll('.delete-btn').forEach(button => {
+          button.addEventListener('click', (e) => {
+            const index = parseInt(button.getAttribute('data-index'));
+            removeItemFromCart(index);
+          });
+        });
+      }
+
+      function removeItemFromCart(index) {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        
+        if (index >= 0 && index < cart.length) {
+          cart.splice(index, 1);
+          localStorage.setItem('cart', JSON.stringify(cart));
+          renderCart();
+          
+          if (window.parent) {
+            window.parent.postMessage({type: 'updateCartCount', count: cart.length}, '*');
+          }
+        }
+      }
+
+      // Обработчик кнопки оформления заказа
+      checkoutBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        
+        if (cart.length === 0) {
+          alert('Ваша корзина пуста!');
+          return;
+        }
+        
+        orderForm.style.display = 'block';
+        orderForm.scrollIntoView({ behavior: 'smooth' });
+      });
+
+      // Обработка отправки формы
+      document.getElementById('orderForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const name = document.getElementById('customer-name').value.trim();
+        const phone = document.getElementById('customer-phone').value.trim();
+        const address = document.getElementById('customer-address').value.trim();
+        const comment = document.getElementById('customer-comment').value.trim();
+        const email = document.getElementById('customer-email').value.trim();
+        
+        if (!name || !phone || !address || !email) {
+          alert('Пожалуйста, заполните все обязательные поля!');
+          return;
+        }
+        
+        if (!validatePhone(phone)) {
+          alert('Пожалуйста, введите корректный номер телефона!');
+          return;
+        }
+
+        if (!validateEmail(email)) {
+          alert('Пожалуйста, введите корректный email!');
+          return;
+        }
+        
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        
+        // Сначала отправляем email
+        sendOrderEmail(cart, name, phone, address, email, comment)
+          .then(() => {
+            // Показываем подтверждение после успешной отправки
+            showOrderConfirmation(cart, name, phone, address, email, comment);
+          })
+          .catch(error => {
+            console.error('Ошибка при отправке заказа:', error);
+            alert('Произошла ошибка при отправке заказа. Пожалуйста, попробуйте еще раз.');
+          });
+      });
+    });
+    
+  </script>
+  <script>
+    // Инициализация EmailJS с вашим User ID
+    (function() {
+      emailjs.init("test1"); // Замените на ваш реальный User ID
+    })();
+  </script>
+  <style>
+    /* ... (ваши существующие стили) ... */
+  </style>
+</head>
+<body>
+  <!-- ... (ваша существующая HTML-разметка) ... -->
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const cartItemsContainer = document.getElementById('cart-items');
+      const cartTotalElement = document.getElementById('cart-total');
+      const checkoutBtn = document.querySelector('.checkout-btn');
+      const orderForm = document.getElementById('order-form');
+      const orderConfirmation = document.getElementById('order-confirmation');
+      const orderDetails = document.getElementById('order-details');
+
+      // ... (ваши существующие функции renderCart, removeItemFromCart и др.) ...
+
+      // Модифицированная функция обработки отправки формы
+      document.getElementById('orderForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const name = document.getElementById('customer-name').value.trim();
+        const phone = document.getElementById('customer-phone').value.trim();
+        const address = document.getElementById('customer-address').value.trim();
+        const email = document.getElementById('customer-email').value.trim();
+        const comment = document.getElementById('customer-comment').value.trim();
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        
+        // Валидация полей
+        if (!validateForm(name, phone, address, email)) {
+          return;
+        }
+
+        // Формируем данные для письма
+        const orderItems = cart.map(item => `${item.name} - ${item.price}`).join('\n');
+        const total = calculateTotal(cart);
+        
+        // Параметры для отправки письма
+        const templateParams = {
+          to_email: 'smyshmish@gmail.com',
+          from_name: 'KatyBakery',
+          customer_name: name,
+          customer_phone: phone,
+          customer_address: address,
+          customer_email: email,
+          customer_comment: comment,
+          order_items: orderItems,
+          order_total: total,
+          date: new Date().toLocaleString()
+        };
+
+        // Отправка письма через EmailJS с ВАШИМИ ID
+        emailjs.send('test1', 'template_osu2whk', templateParams)
+          .then(() => {
+            showOrderConfirmation(cart, name, phone, address, email, comment);
+            localStorage.setItem('cart', JSON.stringify([]));
+            renderCart();
+          }, (error) => {
+            console.error('Ошибка отправки:', error);
+            alert('Ошибка отправки заказа. Позвоните нам: +7 (916) 306-66-16');
+          });
+      });
+
+      // Функция валидации формы
+      function validateForm(name, phone, address, email) {
+        let isValid = true;
+        
+        if (!name || name.length < 2) {
+          alert('Введите корректное имя');
+          isValid = false;
+        }
+        
+        if (!validatePhone(phone)) {
+          alert('Введите корректный телефон (минимум 10 цифр)');
+          isValid = false;
+        }
+        
+        if (!address || address.length < 5) {
+          alert('Введите полный адрес доставки');
+          isValid = false;
+        }
+        
+        if (!validateEmail(email)) {
+          alert('Введите корректный email');
+          isValid = false;
+        }
+        
+        return isValid;
+      }
+
+      // Валидация email
+      function validateEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      }
+
+      // ... (остальные ваши функции) ...
+    });
+  </script>
+</body>
+</html>

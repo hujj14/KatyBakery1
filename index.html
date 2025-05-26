@@ -308,23 +308,91 @@ header {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          let cartCount = 0;
+          const cartCounter = document.getElementById('cart-counter');
+          const addToCartButtons = document.querySelectorAll('.add-to-cart');
+      
+          addToCartButtons.forEach(button => {
+            button.addEventListener('click', () => {
+              cartCount++;
+              cartCounter.textContent = cartCount;
+            });
+          });
+        });
+      </script>
+      
+      
+    
     
     
     <header>
         <div class="header-content">
           <h1 class="logo">KatyBakery</h1>
               
-            <div class="header-socials">
-              <a href="https://instagram.com/katy_bakery.msk?igshid=NTc4MTIwNjQ2YQ==" target="_blank" aria-label="Instagram">
-                <i class="fab fa-instagram"></i>
-              </a>
-              <a href="https://web.telegram.org/a/#1116194195" target="_blank" aria-label="Telegram">
-                <i class="fab fa-telegram-plane"></i>
-              </a>
-            </div>
+          <div class="header-socials">
+            <div class="cart-container">
+                <a href="basket.html" class="cart-button" aria-label="Корзина" target="_blank">
+                    <i class="fas fa-basket-shopping"></i>
+                  </a>
+                  
+                  
+                <div class="cart-counter" id="cart-counter">0</div>
+              </div>
+              
+          
+            <!-- Существующие иконки -->
+            <a href="https://instagram.com/katy_bakery.msk?igshid=NTc4MTIwNjQ2YQ==" target="_blank" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://web.telegram.org/a/#1116194195" target="_blank" aria-label="Telegram">
+              <i class="fab fa-telegram-plane"></i>
+            </a>
+          </div>
+          
           </div>
         </div>
       </header>
+      <!-- весь твой HTML -->
+       
+
+
+
+      
+      <style>
+        
+        .cart-container {
+  position: relative; /* Для позиционирования счётчика относительно корзины */
+  display: inline-block;
+}
+
+.cart-button {
+  font-size: 24px;
+  color: #fff;
+  position: relative;
+  display: inline-block;
+}
+
+.cart-counter {
+  position: absolute;
+  bottom: -2px;   /* чуть ниже иконки */
+  right: -5px;    /* справа от иконки */
+  background-color:#5e3d12;
+  color: white;
+  font-size: 10px;
+  width: 15px;
+  height: 15px;
+  line-height: 15px;
+  border-radius: 50%;
+  text-align: center;
+  font-weight: bold;
+  box-shadow: 0 0 3px rgba(0,0,0,0.3);
+  user-select: none;
+  pointer-events: none;
+}
+
+      </style>
       
       
     
@@ -376,6 +444,21 @@ header {
             color: #333;
             font-size: 1.1em;
         }
+        .add-to-cart {
+        background-color: #5e3d12;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        margin: 10px 0 15px;
+        border-radius: 5px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .add-to-cart:hover {
+        background-color: #3a2e1d;
+    }
     </style>
     
     <div class="products">
@@ -388,6 +471,7 @@ header {
                 <div class="product-name">Шоколадное безумие</div>
                 <div class="product-price">4200₽/кг</div>
             </a>
+            <button class="add-to-cart">Добавить в корзину</button>
         </div>
         
         <!-- Товар 2 -->
@@ -399,6 +483,7 @@ header {
                 <div class="product-name">Малина со сливками</div>
                 <div class="product-price">4200₽/кг</div>
             </a>
+            <button class="add-to-cart">Добавить в корзину</button>
         </div>
         
         <!-- Товар 3 -->
@@ -410,6 +495,7 @@ header {
                 <div class="product-name">Лимонный медовик с облепиховым курдом</div>
                 <div class="product-price">3800₽/кг</div>
             </a>
+            <button class="add-to-cart">Добавить в корзину</button>
         </div>
         
         <!-- Товар 4 -->
@@ -421,6 +507,7 @@ header {
                 <div class="product-name">Шоколадный медовик</div>
                 <div class="product-price">4300₽/кг</div>
             </a>
+            <button class="add-to-cart">Добавить в корзину</button>
         </div>
         
         <!-- Товар 5 -->
@@ -432,6 +519,7 @@ header {
                 <div class="product-name">Птичье Немолоко</div>
                 <div class="product-price">2500₽/кг</div>
             </a>
+            <button class="add-to-cart">Добавить в корзину</button>
         </div>
         
         <!-- Товар 6 -->
@@ -443,6 +531,7 @@ header {
                 <div class="product-name">Панчо</div>
                 <div class="product-price">3800₽/кг</div>
             </a>
+            <button class="add-to-cart">Добавить в корзину</button>
         </div>
         
         <!-- Товар 7 -->
@@ -454,6 +543,7 @@ header {
                 <div class="product-name">Кето торт на эритрите "Пломбир - апельсин"</div>
                 <div class="product-price">4200₽/кг</div>
             </a>
+            <button class="add-to-cart">Добавить в корзину</button>
         </div>
         
         <!-- Товар 8 -->
@@ -465,6 +555,7 @@ header {
                 <div class="product-name">Манговый тарт без сахара</div>
                 <div class="product-price">1700₽/кг</div>
             </a>
+            <button class="add-to-cart">Добавить в корзину</button>
         </div>
         
         <!-- Товар 9 -->
@@ -476,6 +567,7 @@ header {
                 <div class="product-name">Тарт большой манговый без сахара</div>
                 <div class="product-price">2800₽/кг</div>
             </a>
+            <button class="add-to-cart">Добавить в корзину</button>
         </div>
         
         <!-- Товар 10 -->
@@ -487,6 +579,7 @@ header {
                 <div class="product-name">Медовик классический из цельнозерновой муки</div>
                 <div class="product-price">3800₽/кг</div>
             </a>
+            <button class="add-to-cart">Добавить в корзину</button>
         </div>
         
         <!-- Товар 11 -->
@@ -498,8 +591,141 @@ header {
                 <div class="product-name">Медовик миндальный с малиной</div>
                 <div class="product-price">3500₽/кг</div>
             </a>
+            <button class="add-to-cart">Добавить в корзину</button>
         </div>
     </div>
+    <script>
+       
+            // Инициализация счетчика
+            updateCartCounter();
+        </script>
+       <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+            const cartCounter = document.getElementById('cart-counter');
+        
+            // Функция для обновления счетчика корзины
+            function updateCartCounter() {
+                const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                cartCounter.textContent = cart.length;
+            }
+        
+            addToCartButtons.forEach((button) => {
+                button.addEventListener('click', () => {
+                    const product = button.closest('.product');
+                    if (!product) return;
+        
+                    const img = product.querySelector('.product-image img').src;
+                    const name = product.querySelector('.product-name').textContent.trim();
+                    const price = product.querySelector('.product-price').textContent.trim();
+                    const id = product.dataset.productId || Date.now().toString(); // Уникальный ID товара
+        
+                    // Получаем текущую корзину
+                    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                    
+                    // Проверяем, есть ли уже такой товар в корзине
+                    const existingItemIndex = cart.findIndex(item => 
+                        item.name === name && item.price === price
+                    );
+        
+                    if (existingItemIndex >= 0) {
+                        // Если товар уже есть, увеличиваем количество
+                        cart[existingItemIndex].quantity = (cart[existingItemIndex].quantity || 1) + 1;
+                    } else {
+                        // Если товара нет, добавляем новый
+                        cart.push({ 
+                            id,
+                            img, 
+                            name, 
+                            price,
+                            quantity: 1
+                        });
+                    }
+        
+                    // Сохраняем обновленную корзину
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    
+                    // Обновляем счетчик
+                    updateCartCounter();
+                    
+                    // Показываем уведомление
+                    showNotification(`Товар "${name}" добавлен в корзину`);
+                });
+            });
+            
+        
+            // Функция для показа уведомления
+            function showNotification(message) {
+                const notification = document.createElement('div');
+                notification.style.position = 'fixed';
+                notification.style.bottom = '20px';
+                notification.style.right = '20px';
+                notification.style.backgroundColor = '#5e3d12';
+                notification.style.color = 'white';
+                notification.style.padding = '15px 25px';
+                notification.style.borderRadius = '5px';
+                notification.style.zIndex = '1000';
+                notification.style.boxShadow = '0 3px 10px rgba(0,0,0,0.2)';
+                notification.style.animation = 'fadeIn 0.3s';
+                notification.textContent = message;
+                
+                document.body.appendChild(notification);
+                
+                // Удаляем уведомление через 3 секунды
+                setTimeout(() => {
+                    notification.style.animation = 'fadeOut 0.3s';
+                    setTimeout(() => notification.remove(), 300);
+                }, 3000);
+            }
+        
+            // Добавляем стили для анимации
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes fadeIn {
+                    from { opacity: 0; transform: translateY(20px); }
+                    to { opacity: 1; transform: translateY(0); }
+                }
+                @keyframes fadeOut {
+                    from { opacity: 1; transform: translateY(0); }
+                    to { opacity: 0; transform: translateY(20px); }
+                }
+            `;
+            document.head.appendChild(style);
+        
+            // Инициализируем счетчик при загрузке
+            updateCartCounter();
+        });
+        </script>
+        <style>
+            .cart-notification {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background-color: #5e3d12;
+                color: white;
+                padding: 12px 24px;
+                border-radius: 4px;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+                z-index: 1000;
+                animation: fadeIn 0.3s forwards;
+            }
+            
+            .cart-notification.fade-out {
+                animation: fadeOut 0.3s forwards;
+            }
+            
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(20px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            
+            @keyframes fadeOut {
+                from { opacity: 1; transform: translateY(0); }
+                to { opacity: 0; transform: translateY(20px); }
+            }
+            </style>
+          
+        
 
     <footer>
         <div class="footer-content">
